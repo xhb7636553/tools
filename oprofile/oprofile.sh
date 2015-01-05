@@ -1,3 +1,6 @@
+#部分系统不支持time interrupt，会导致抓不到数据，可使用modprobe oprofile timer=1
+#查看状态：dmesg|grep oprofile，会追加多一行
+
 #!/bin/bash
 
 if [ $# -ne 1 ];then
@@ -18,6 +21,6 @@ opcontrol --start  --no-vmlinux
 opcontrol --reset
 $1 
 opcontrol --dump
-opreport
+opreport -l
 opcontrol --stop 
 opcontrol --shutdown 
